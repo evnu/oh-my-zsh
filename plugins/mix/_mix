@@ -63,6 +63,14 @@ __task_list ()
     _wanted tasks expl 'help' compadd $tasks
 }
 
+local -a _new_project_arguments
+_new_project_arguments=(
+    '--app: Name the OTP application for the project'
+    '--module: Name the modules in the generated code skeleton'
+    '--sup: Create OTP aplication skeleton including supervision tree'
+    '--umbrella: Create an umbrella project'
+)
+
 local expl
 
 local curcontext="$curcontext" state line
@@ -88,6 +96,9 @@ case $state in
          ;;
       (run)
          _files
+         ;;
+      (new)
+          _describe "mix new project" _new_project_arguments
          ;;
     esac
   ;;
